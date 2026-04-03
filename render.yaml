@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: rasoiexpress-backend
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT --workers 2 --timeout 120
+    envVars:
+      - key: SUPABASE_DB_URL
+        sync: false          # You paste the value in Render dashboard
+      - key: SECRET_KEY
+        generateValue: true  # Render generates a random value automatically
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: DEBUG
+        value: false
